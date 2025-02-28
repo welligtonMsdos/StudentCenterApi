@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using StudentCenterApi._1___Model;
 using StudentCenterApi._4___Interfaces.Repository;
 using StudentCenterApi._4___Interfaces.Services;
 using StudentCenterApi._5___Dtos.Status;
@@ -15,6 +16,11 @@ public class StatusService : IStatusService
     {
         _repository = repository;
         _mapper = mapper;
+    }
+
+    public async Task<bool> Delete(StatusDto status)
+    {
+        return await _repository.Delete(_mapper.Map<Status>(status));
     }
 
     public async Task<ICollection<StatusDto>> GetAll()

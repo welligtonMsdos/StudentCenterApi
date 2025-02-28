@@ -5,10 +5,10 @@ namespace StudentCenterApi.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]
-public class StatusController : BaseController
+public class StudentCenterBaseController : BaseController
 {
-    private readonly IStatusService _service;
-    public StatusController(IStatusService service)
+    private readonly IStudentCenterBaseService _service;
+    public StudentCenterBaseController(IStudentCenterBaseService service)
     {
         _service = service;
     }
@@ -33,7 +33,7 @@ public class StatusController : BaseController
         {
             var status = await _service.GetById(id);
 
-            if(status == null) return NotFound();
+            if (status == null) return NotFound();
 
             return Ok(status);
         }
@@ -48,11 +48,11 @@ public class StatusController : BaseController
     {
         try
         {
-            if(id == 0) return NotFound();
+            if (id == 0) return NotFound();
 
-            var status = await _service.GetById(id);
+            var studentCenterBase = await _service.GetById(id);
 
-            var result = await _service.Delete(status);
+            var result = await _service.Delete(studentCenterBase);
 
             if (!result) return Error("Error when deleting record");
 

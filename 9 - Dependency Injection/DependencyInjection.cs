@@ -12,6 +12,9 @@ public static class DependencyInjection
         services.AddScoped<IStatusRepository, StatusRepository>();
         services.AddScoped<IStatusService, StatusService>();
 
+        services.AddScoped<IStudentCenterBaseRepository, StudentCenterBaseRepository>();
+        services.AddScoped<IStudentCenterBaseService, StudentCenterBaseService>();
+
         return services;
     }
 }

@@ -6,4 +6,5 @@ public interface IStatusService
 {
     Task<ICollection<StatusDto>> GetAll();
     Task<StatusDto> GetById(int id);
+    Task<bool> Delete(StatusDto status);
 }

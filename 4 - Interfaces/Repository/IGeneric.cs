@@ -6,5 +6,5 @@ public interface IGeneric<T>
     Task<T> GetById(int id);
     Task<T> Post(T entity);
     Task<T> Put(T entity);
-    Task<bool> Delete(int id);
+    Task<bool> Delete(T entity);
 }

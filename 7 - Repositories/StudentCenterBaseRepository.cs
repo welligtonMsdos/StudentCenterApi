@@ -5,15 +5,16 @@ using StudentCenterApi._4___Interfaces.Repository;
 
 namespace StudentCenterApi._7___Repositories;
 
-public class StatusRepository : IStatusRepository
+public class StudentCenterBaseRepository : IStudentCenterBaseRepository
 {
     private readonly StudentCenterContext _context;
 
-    public StatusRepository(StudentCenterContext context)
+    public StudentCenterBaseRepository(StudentCenterContext context)
     {
         _context = context;
     }
-    public async Task<bool> Delete(Status entity)
+
+    public async Task<bool> Delete(StudentCenterBase entity)
     {
         return await Task.Run(() =>
         {
@@ -25,11 +26,11 @@ public class StatusRepository : IStatusRepository
         });
     }
 
-    public async Task<ICollection<Status>> GetAll()
+    public async Task<ICollection<StudentCenterBase>> GetAll()
     {
         return await Task.Run(() =>
         {
-            var status = _context.Status
+            var status = _context.StudentCenterBase
                             .AsNoTracking()
                             .OrderBy(x => x.Description)
                             .ToListAsync();
@@ -38,11 +39,11 @@ public class StatusRepository : IStatusRepository
         });
     }
 
-    public async Task<Status> GetById(int id)
+    public async Task<StudentCenterBase> GetById(int id)
     {
         return await Task.Run(() =>
         {
-            var status = _context.Status
+            var status = _context.StudentCenterBase
                             .AsNoTracking()
                             .FirstAsync(x => x.Id == id);
 
@@ -50,12 +51,12 @@ public class StatusRepository : IStatusRepository
         });
     }
 
-    public Task<Status> Post(Status entity)
+    public Task<StudentCenterBase> Post(StudentCenterBase entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Status> Put(Status entity)
+    public Task<StudentCenterBase> Put(StudentCenterBase entity)
     {
         throw new NotImplementedException();
     }
