@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StudentCenterApi._1___Model;
 using StudentCenterApi._4___Interfaces.Services;
+using StudentCenterApi._5___Dtos.StudentCenter;
 
 namespace StudentCenterApi.Controllers;
 
@@ -57,6 +59,42 @@ public class StudentCenterBaseController : BaseController
             if (!result) return Error("Error when deleting record");
 
             return Sucess("successfully deleted");
+        }
+        catch (Exception ex)
+        {
+            return Error(ex);
+        }
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<StudentCenterBase>> Post([FromBody] StudentCenterBaseCreateDto dto)
+    {
+        try
+        {
+            var result = await _service.Post(dto);
+
+            var created = CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
+
+            return Sucess(created);
+        }
+        catch (Exception ex)
+        {
+            return Error(ex);
+        }
+    }
+
+    [HttpPut]
+    public async Task<ActionResult<StudentCenterBase>> Put([FromBody] StudentCenterBaseUpdateDto dto)
+    {
+        try
+        {
+            if (dto.Id == 0) return Error("ID cannot be zero");
+
+            var result = await _service.Put(dto);
+
+            var update = CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
+
+            return Sucess(update, true);
         }
         catch (Exception ex)
         {

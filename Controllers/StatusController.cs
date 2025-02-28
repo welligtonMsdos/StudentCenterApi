@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StudentCenterApi._1___Model;
 using StudentCenterApi._4___Interfaces.Services;
+using StudentCenterApi._5___Dtos.Status;
 
 namespace StudentCenterApi.Controllers;
 
@@ -33,7 +35,7 @@ public class StatusController : BaseController
         {
             var status = await _service.GetById(id);
 
-            if(status == null) return NotFound();
+            if (status == null) return NotFound();
 
             return Ok(status);
         }
@@ -48,7 +50,7 @@ public class StatusController : BaseController
     {
         try
         {
-            if(id == 0) return NotFound();
+            if (id == 0) return NotFound();
 
             var status = await _service.GetById(id);
 
@@ -57,6 +59,42 @@ public class StatusController : BaseController
             if (!result) return Error("Error when deleting record");
 
             return Sucess("successfully deleted");
+        }
+        catch (Exception ex)
+        {
+            return Error(ex);
+        }
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<Status>> Post([FromBody] StatusCreateDto dto)
+    {
+        try
+        {
+            var result = await _service.Post(dto);
+
+            var created = CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
+
+            return Sucess(created);
+        }
+        catch (Exception ex)
+        {
+            return Error(ex);
+        }
+    }
+
+    [HttpPut]
+    public async Task<ActionResult<Status>> Put([FromBody] StatusUpdateDto dto)
+    {
+        try
+        {
+            if (dto.Id == 0) return Error("ID cannot be zero");
+
+            var result = await _service.Put(dto);
+
+            var update = CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
+
+            return Sucess(update, true);
         }
         catch (Exception ex)
         {

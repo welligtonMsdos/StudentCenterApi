@@ -13,6 +13,7 @@ public class StatusRepository : IStatusRepository
     {
         _context = context;
     }
+
     public async Task<bool> Delete(Status entity)
     {
         return await Task.Run(() =>
@@ -50,13 +51,31 @@ public class StatusRepository : IStatusRepository
         });
     }
 
-    public Task<Status> Post(Status entity)
+    public async Task<Status> Post(Status entity)
     {
-        throw new NotImplementedException();
+        return await Task.Run(() =>
+        {
+            entity.Active = true;
+
+            _context.Status.Add(entity);
+
+            _context.SaveChangesAsync();
+
+            return entity;
+        });
     }
 
-    public Task<Status> Put(Status entity)
+    public async Task<Status> Put(Status entity)
     {
-        throw new NotImplementedException();
+        return await Task.Run(() =>
+        {
+            entity.Active = true;
+
+            _context.Status.Update(entity);
+
+            _context.SaveChangesAsync();
+
+            return entity;
+        });
     }
 }

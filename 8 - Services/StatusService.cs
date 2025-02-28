@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using FluentValidation.Results;
 using StudentCenterApi._1___Model;
 using StudentCenterApi._4___Interfaces.Repository;
 using StudentCenterApi._4___Interfaces.Services;
 using StudentCenterApi._5___Dtos.Status;
+using StudentCenterApi.A___Validation;
 
 namespace StudentCenterApi._8___Services;
 
@@ -18,9 +20,9 @@ public class StatusService : IStatusService
         _mapper = mapper;
     }
 
-    public async Task<bool> Delete(StatusDto status)
+    public async Task<bool> Delete(StatusDto statusDto)
     {
-        return await _repository.Delete(_mapper.Map<Status>(status));
+        return await _repository.Delete(_mapper.Map<Status>(statusDto));
     }
 
     public async Task<ICollection<StatusDto>> GetAll()
@@ -32,4 +34,30 @@ public class StatusService : IStatusService
     {
         return _mapper.Map<StatusDto>(await _repository.GetById(id));
     }
+
+    public async Task<Status> Post(StatusCreateDto statusCreateDto)
+    {
+        var status = _mapper.Map<Status>(statusCreateDto);
+
+        ValidationResult valid = new StatusValidation().Validate(status);
+
+        string[] erros = valid.ToString("~").Split('~');
+
+        if (!valid.IsValid) throw new Exception(erros[0]);
+
+        return await _repository.Post(status);
+    }
+
+    public async Task<Status> Put(StatusUpdateDto statusUpdateDto)
+    {
+        var status = _mapper.Map<Status>(statusUpdateDto);
+
+        ValidationResult valid = new StatusValidation().Validate(status);
+
+        string[] erros = valid.ToString("~").Split('~');
+
+        if (!valid.IsValid) throw new Exception(erros[0]);
+
+        return await _repository.Put(status);
+    }   
 }

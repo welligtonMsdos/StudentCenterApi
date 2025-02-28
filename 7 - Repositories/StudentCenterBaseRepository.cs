@@ -51,13 +51,31 @@ public class StudentCenterBaseRepository : IStudentCenterBaseRepository
         });
     }
 
-    public Task<StudentCenterBase> Post(StudentCenterBase entity)
+    public async Task<StudentCenterBase> Post(StudentCenterBase entity)
     {
-        throw new NotImplementedException();
+        return await Task.Run(() =>
+        {
+            entity.Active = true;
+
+            _context.StudentCenterBase.Add(entity);
+
+            _context.SaveChangesAsync();
+
+            return entity;
+        });
     }
 
-    public Task<StudentCenterBase> Put(StudentCenterBase entity)
+    public async Task<StudentCenterBase> Put(StudentCenterBase entity)
     {
-        throw new NotImplementedException();
+        return await Task.Run(() =>
+        {
+            entity.Active = true;
+
+            _context.StudentCenterBase.Update(entity);
+
+            _context.SaveChangesAsync();
+
+            return entity;
+        });
     }
 }
