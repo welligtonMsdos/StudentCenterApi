@@ -16,66 +16,51 @@ public class StatusRepository : IStatusRepository
 
     public async Task<bool> Delete(Status entity)
     {
-        return await Task.Run(() =>
-        {
-            _context.Remove(entity);
+        _context.Remove(entity);
 
-            var result = _context.SaveChanges();
+        var result = await _context.SaveChangesAsync();
 
-            return result > 0 ? true : false;
-        });
+        return result > 0;
     }
 
     public async Task<ICollection<Status>> GetAll()
     {
-        return await Task.Run(() =>
-        {
-            var status = _context.Status
-                            .AsNoTracking()
-                            .OrderBy(x => x.Description)
-                            .ToListAsync();
+        var status = await _context.Status
+                             .AsNoTracking()
+                             .OrderBy(x => x.Description)
+                             .ToListAsync();
 
-            return status;
-        });
+        return status;
     }
 
     public async Task<Status> GetById(int id)
     {
-        return await Task.Run(() =>
-        {
-            var status = _context.Status
+        var status = await _context.Status
                             .AsNoTracking()
                             .FirstAsync(x => x.Id == id);
 
-            return status;
-        });
+        return status;
     }
 
     public async Task<Status> Post(Status entity)
     {
-        return await Task.Run(() =>
-        {
-            entity.Active = true;
+        entity.Active = true;
 
-            _context.Status.Add(entity);
+        _context.Status.Add(entity);
 
-            _context.SaveChangesAsync();
+        await _context.SaveChangesAsync();
 
-            return entity;
-        });
+        return entity;
     }
 
     public async Task<Status> Put(Status entity)
     {
-        return await Task.Run(() =>
-        {
-            entity.Active = true;
+        entity.Active = true;
 
-            _context.Status.Update(entity);
+        _context.Status.Update(entity);
 
-            _context.SaveChangesAsync();
+        await _context.SaveChangesAsync();
 
-            return entity;
-        });
+        return entity;
     }
 }
