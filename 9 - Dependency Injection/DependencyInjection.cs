@@ -15,6 +15,9 @@ public static class DependencyInjection
         services.AddScoped<IStudentCenterBaseRepository, StudentCenterBaseRepository>();
         services.AddScoped<IStudentCenterBaseService, StudentCenterBaseService>();
 
+        services.AddScoped<IRequestTypeRepository, RequestTypeRepository>();
+        services.AddScoped<IRequestTypeService, RequestTypeService>();
+
         return services;
     }
 }

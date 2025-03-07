@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentCenterApi._3___Context;
 
@@ -10,9 +11,11 @@ using StudentCenterApi._3___Context;
 namespace StudentCenterApi.Migrations
 {
     [DbContext(typeof(StudentCenterContext))]
-    partial class StudentCenterContextModelSnapshot : ModelSnapshot
+    [Migration("20250307152250_addRequestType")]
+    partial class addRequestType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace StudentCenterApi.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(20)");
 
                     b.HasKey("Id");
 
