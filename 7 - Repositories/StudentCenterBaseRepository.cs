@@ -16,66 +16,51 @@ public class StudentCenterBaseRepository : IStudentCenterBaseRepository
 
     public async Task<bool> Delete(StudentCenterBase entity)
     {
-        return await Task.Run(() =>
-        {
-            _context.Remove(entity);
+        _context.Remove(entity);
 
-            var result = _context.SaveChanges();
+        var result = await _context.SaveChangesAsync();
 
-            return result > 0 ? true : false;
-        });
+        return result > 0;
     }
 
     public async Task<ICollection<StudentCenterBase>> GetAll()
     {
-        return await Task.Run(() =>
-        {
-            var status = _context.StudentCenterBase
+        var studentCenter = await _context.StudentCenterBase
                             .AsNoTracking()
                             .OrderBy(x => x.Description)
                             .ToListAsync();
 
-            return status;
-        });
+        return studentCenter;
     }
 
     public async Task<StudentCenterBase> GetById(int id)
     {
-        return await Task.Run(() =>
-        {
-            var status = _context.StudentCenterBase
+        var studentCenter = await _context.StudentCenterBase
                             .AsNoTracking()
                             .FirstAsync(x => x.Id == id);
 
-            return status;
-        });
+        return studentCenter;
     }
 
     public async Task<StudentCenterBase> Post(StudentCenterBase entity)
     {
-        return await Task.Run(() =>
-        {
-            entity.Active = true;
+        entity.Active = true;
 
-            _context.StudentCenterBase.Add(entity);
+        _context.StudentCenterBase.Add(entity);
 
-            _context.SaveChangesAsync();
+        await _context.SaveChangesAsync();
 
-            return entity;
-        });
+        return entity;
     }
 
     public async Task<StudentCenterBase> Put(StudentCenterBase entity)
     {
-        return await Task.Run(() =>
-        {
-            entity.Active = true;
+        entity.Active = true;
 
-            _context.StudentCenterBase.Update(entity);
+        _context.StudentCenterBase.Update(entity);
 
-            _context.SaveChangesAsync();
+        await _context.SaveChangesAsync();
 
-            return entity;
-        });
+        return entity;
     }
 }
