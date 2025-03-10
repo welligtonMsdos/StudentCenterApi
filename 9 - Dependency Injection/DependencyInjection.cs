@@ -18,6 +18,9 @@ public static class DependencyInjection
         services.AddScoped<IRequestTypeRepository, RequestTypeRepository>();
         services.AddScoped<IRequestTypeService, RequestTypeService>();
 
+        services.AddScoped<ISolicitationRepository, SolicitationRepository>();
+        services.AddScoped<ISolicitationService, SolicitationService>();
+
         return services;
     }
 }

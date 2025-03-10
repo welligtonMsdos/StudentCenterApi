@@ -39,7 +39,7 @@ public abstract class BaseController : ControllerBase
         return Ok(new
         {
             success = false,
-            message = ex.InnerException.InnerException.Message
+            message = ex.InnerException.Message
         });
     }
 

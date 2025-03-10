@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using StudentCenterApi._1___Model;
 using StudentCenterApi._5___Dtos.RequestType;
+using StudentCenterApi._5___Dtos.Solicitation;
 using StudentCenterApi._5___Dtos.Status;
 using StudentCenterApi._5___Dtos.StudentCenter;
 
@@ -21,5 +22,12 @@ public class StudentCenterProfile : Profile
         CreateMap<RequestType, RequestTypeDto>().ReverseMap();
         CreateMap<RequestType, RequestTypeCreateDto>().ReverseMap();
         CreateMap<RequestType, RequestTypeUpdateDto>().ReverseMap();
+
+        CreateMap<Solicitation, SolicitationCreateDto>().ReverseMap();
+        CreateMap<Solicitation, SolicitationUpdateDto>().ReverseMap();
+        CreateMap<Solicitation, SolicitationDto>()
+            .ForMember(x => x.DescriptionStatus, x => x.MapFrom(x => x.Status.Description))
+            .ForMember(x => x.DescriptionRequestType, x => x.MapFrom(x => x.RequestType.Description))
+            .ReverseMap();
     }
 }

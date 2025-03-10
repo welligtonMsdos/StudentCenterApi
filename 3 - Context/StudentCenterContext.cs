@@ -13,11 +13,13 @@ public class StudentCenterContext: DbContext
     public DbSet<Status> Status { get; set; }
     public DbSet<StudentCenterBase> StudentCenterBase { get; set; }
     public DbSet<RequestType> RequestType { get; set; }
+    public DbSet<Solicitation> Solicitation { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new StatusMap());
         modelBuilder.ApplyConfiguration(new StudentCenterBaseMap());
         modelBuilder.ApplyConfiguration(new RequestTypeMap());
+        modelBuilder.ApplyConfiguration(new SolicitationMap());
     }
 }
