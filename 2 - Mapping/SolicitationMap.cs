@@ -30,6 +30,6 @@ public class SolicitationMap : IEntityTypeConfiguration<Solicitation>
         builder.HasOne(p => p.RequestType)
             .WithMany(p => p.Solicitation)
             .HasForeignKey(p => p.RequestTypeId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Cascade);        
     }
 }

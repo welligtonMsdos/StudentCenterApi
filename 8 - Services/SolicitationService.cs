@@ -23,19 +23,24 @@ public class SolicitationService : ISolicitationService
     public async Task<bool> Delete(SolicitationDto solicitationDto)
     {
         return await _repository.Delete(_mapper.Map<Solicitation>(solicitationDto));
-    }
-
-    public async Task<ICollection<SolicitationDto>> GetAll()
-    {
-        return _mapper.Map<ICollection<SolicitationDto>>(await _repository.GetAll());
-    }
+    }   
 
     public async Task<SolicitationDto> GetById(int id)
     {
         return _mapper.Map<SolicitationDto>(await _repository.GetById(id));
     }
 
-    public async Task<Solicitation> Post(SolicitationCreateDto solicitationCreateDto)
+    public async Task<ICollection<SolicitationDto>> GetByStatusId(int statusId)
+    {
+        return _mapper.Map<ICollection<SolicitationDto>>(await _repository.GetByStatusId(statusId));
+    }
+
+    public async Task<ICollection<SolicitationDto>> GetByStudentId(int studentId)
+    {
+        return _mapper.Map<ICollection<SolicitationDto>>(await _repository.GetByStudentId(studentId));
+    }
+
+    public async Task<SolicitationDto> Post(SolicitationCreateDto solicitationCreateDto)
     {
         var solicitation = _mapper.Map<Solicitation>(solicitationCreateDto);
 
@@ -45,10 +50,10 @@ public class SolicitationService : ISolicitationService
 
         if (!valid.IsValid) throw new Exception(erros[0]);
 
-        return await _repository.Post(solicitation);
+        return _mapper.Map<SolicitationDto>(await _repository.Post(solicitation));
     }
 
-    public async Task<Solicitation> Put(SolicitationUpdateDto solicitationUpdateDto)
+    public async Task<SolicitationDto> Put(SolicitationUpdateDto solicitationUpdateDto)
     {
         var solicitation = _mapper.Map<Solicitation>(solicitationUpdateDto);
 
@@ -58,6 +63,6 @@ public class SolicitationService : ISolicitationService
 
         if (!valid.IsValid) throw new Exception(erros[0]);
 
-        return await _repository.Put(solicitation);
+        return _mapper.Map<SolicitationDto>(await _repository.Put(solicitation));
     }
 }

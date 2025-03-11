@@ -21,19 +21,7 @@ public class SolicitationRepository : ISolicitationRepository
         var result = await _context.SaveChangesAsync();
 
         return result > 0;
-    }
-
-    public async Task<ICollection<Solicitation>> GetAll()
-    {
-        var solicitation = await _context.Solicitation
-                             .Include(x => x.Status)
-                             .Include(x => x.RequestType)
-                             .AsNoTracking()
-                             .OrderBy(x => x.Description)
-                             .ToListAsync();
-
-        return solicitation;
-    }
+    }   
 
     public async Task<Solicitation> GetById(int id)
     {
@@ -46,13 +34,47 @@ public class SolicitationRepository : ISolicitationRepository
         return solicitation;
     }
 
+    public async Task<ICollection<Solicitation>> GetByStatusId(int statusId)
+    {
+        var solicitation = await _context.Solicitation
+                            .Include(x => x.Status)
+                            .Include(x => x.RequestType)
+                            .AsNoTracking()
+                            .Where(x => x.StatusId == statusId)
+                            .OrderBy(x => x.Description)
+                            .ToListAsync();
+
+        return solicitation;
+    }
+
+    public async Task<ICollection<Solicitation>> GetByStudentId(int studentId)
+    {
+        var solicitation = await _context.Solicitation
+                            .Include(x => x.Status)
+                            .Include(x => x.RequestType)
+                            .AsNoTracking()
+                            .Where(x => x.StudentId == studentId)
+                            .OrderBy(x => x.Description)
+                            .ToListAsync();
+
+        return solicitation;
+    }
+
     public async Task<Solicitation> Post(Solicitation entity)
     {
         entity.Active = true;
 
-        _context.Solicitation.Add(entity);
+        _context.Solicitation.Add(entity);      
 
         await _context.SaveChangesAsync();
+
+        await _context.Entry(entity)
+                  .Reference(s => s.Status) 
+                  .LoadAsync();
+
+        await _context.Entry(entity)
+                  .Reference(s => s.RequestType) 
+                  .LoadAsync();
 
         return entity;
     }
@@ -64,6 +86,14 @@ public class SolicitationRepository : ISolicitationRepository
         _context.Solicitation.Update(entity);
 
         await _context.SaveChangesAsync();
+
+        await _context.Entry(entity)
+                  .Reference(s => s.Status)
+                  .LoadAsync();
+
+        await _context.Entry(entity)
+                  .Reference(s => s.RequestType)
+                  .LoadAsync();
 
         return entity;
     }

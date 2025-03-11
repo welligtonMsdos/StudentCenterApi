@@ -15,12 +15,33 @@ public class SolicitationController : BaseController
         _service = service;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAll()
+    [HttpGet("[Action]")]    
+    public async Task<IActionResult> GetByStatusId(int statusId)
     {
         try
         {
-            return Ok(await _service.GetAll());
+            var solicitation = await _service.GetByStatusId(statusId);
+
+            if (solicitation == null) return NotFound();
+
+            return Ok(solicitation);
+        }
+        catch (Exception ex)
+        {
+            return Error(ex);
+        }
+    }
+
+    [HttpGet("[Action]")]    
+    public async Task<IActionResult> GetByStudentId(int studentId)
+    {
+        try
+        {
+            var solicitation = await _service.GetByStudentId(studentId);
+
+            if (solicitation == null) return NotFound();
+
+            return Ok(solicitation);
         }
         catch (Exception ex)
         {
@@ -73,7 +94,7 @@ public class SolicitationController : BaseController
         {
             var result = await _service.Post(dto);
 
-            var created = CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
+            var created = CreatedAtAction(nameof(Post), nameof(SolicitationController), new { id = result.Id }, result);
 
             return Sucess(created);
         }
@@ -92,7 +113,7 @@ public class SolicitationController : BaseController
 
             var result = await _service.Put(dto);
 
-            var update = CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
+            var update = CreatedAtAction(nameof(Put), nameof(SolicitationController), new { id = result.Id }, result);
 
             return Sucess(update, true);
         }
