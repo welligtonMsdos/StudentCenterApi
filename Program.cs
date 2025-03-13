@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using StudentCenterApi._3___Context;
-using StudentCenterApi._9___Dependency_Injection;
+using StudentCenterApi.src.Infrastructure.Data.Context;
+using StudentCenterApi.src.Infrastructure.Dependency_Injection;
 
 namespace StudentCenterApi
 {
