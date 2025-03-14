@@ -32,6 +32,8 @@ public class RequestTypeService : IRequestTypeService
 
     public async Task<RequestTypeDto> GetById(int id)
     {
+        if (id <= 0) throw new Exception("ID cannot be zero");
+
         return _mapper.Map<RequestTypeDto>(await _repository.GetById(id));
     }
 

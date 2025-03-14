@@ -32,6 +32,8 @@ public class StatusService : IStatusService
 
     public async Task<StatusDto> GetById(int id)
     {
+        if (id <= 0) throw new Exception("ID cannot be zero");
+
         return _mapper.Map<StatusDto>(await _repository.GetById(id));
     }
 
