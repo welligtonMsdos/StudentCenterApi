@@ -22,6 +22,8 @@ public class RequestTypeService : IRequestTypeService
 
     public async Task<bool> Delete(RequestTypeDto requestTypeDto)
     {
+        if (requestTypeDto.Id <= 0) throw new Exception("ID cannot be zero");
+
         return await _repository.Delete(_mapper.Map<RequestType>(requestTypeDto));
     }
 

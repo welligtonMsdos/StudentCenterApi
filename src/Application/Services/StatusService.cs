@@ -22,6 +22,8 @@ public class StatusService : IStatusService
 
     public async Task<bool> Delete(StatusDto statusDto)
     {
+        if (statusDto.Id <= 0) throw new Exception("ID cannot be zero");
+
         return await _repository.Delete(_mapper.Map<Status>(statusDto));
     }
 
