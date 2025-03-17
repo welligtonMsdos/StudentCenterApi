@@ -22,6 +22,8 @@ public class StudentCenterBaseService : IStudentCenterBaseService
 
     public async Task<bool> Delete(StudentCenterBaseDto studentCenterBaseDto)
     {
+        if (studentCenterBaseDto.Id <= 0) throw new Exception("ID cannot be zero");
+
         return await _repository.Delete(_mapper.Map<StudentCenterBase>(studentCenterBaseDto));
     }
 
@@ -32,6 +34,8 @@ public class StudentCenterBaseService : IStudentCenterBaseService
 
     public async Task<StudentCenterBaseDto> GetById(int id)
     {
+        if (id <= 0) throw new Exception("ID cannot be zero");
+
         return _mapper.Map<StudentCenterBaseDto>(await _repository.GetById(id));
     }
 
