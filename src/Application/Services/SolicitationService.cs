@@ -30,9 +30,9 @@ public class SolicitationService : ISolicitationService
         return _mapper.Map<SolicitationDto>(await _repository.GetById(id));
     }
 
-    public async Task<ICollection<SolicitationDto>> GetByStatusId(int statusId)
+    public async Task<ICollection<SolicitationDto>> GetByStatusId(int statusId, int studentId)
     {
-        return _mapper.Map<ICollection<SolicitationDto>>(await _repository.GetByStatusId(statusId));
+        return _mapper.Map<ICollection<SolicitationDto>>(await _repository.GetByStatusId(statusId, studentId));
     }
 
     public async Task<ICollection<SolicitationDto>> GetByStudentId(int studentId)

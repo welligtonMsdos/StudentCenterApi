@@ -5,7 +5,7 @@ namespace StudentCenterApi.src.Domain.Interfaces;
 public interface ISolicitationRepository
 {
     Task<ICollection<Solicitation>> GetByStudentId(int studentId);
-    Task<ICollection<Solicitation>> GetByStatusId(int statusId);
+    Task<ICollection<Solicitation>> GetByStatusId(int statusId, int studentId);
     Task<Solicitation> GetById(int id);
     Task<Solicitation> Post(Solicitation entity);
     Task<Solicitation> Put(Solicitation entity);

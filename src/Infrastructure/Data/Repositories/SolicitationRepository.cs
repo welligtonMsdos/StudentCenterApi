@@ -34,13 +34,16 @@ public class SolicitationRepository : ISolicitationRepository
         return solicitation;
     }
 
-    public async Task<ICollection<Solicitation>> GetByStatusId(int statusId)
+    public async Task<ICollection<Solicitation>> GetByStatusId(int statusId, int studentId)
     {
+        if(statusId == 0) return await GetByStudentId(studentId);
+        
         var solicitation = await _context.Solicitation
                             .Include(x => x.Status)
                             .Include(x => x.RequestType)
                             .AsNoTracking()
-                            .Where(x => x.StatusId == statusId)
+                            .Where(x => x.StatusId == statusId && 
+                                   x.StudentId == studentId)
                             .OrderBy(x => x.Description)
                             .ToListAsync();
 

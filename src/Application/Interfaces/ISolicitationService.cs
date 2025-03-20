@@ -5,7 +5,7 @@ namespace StudentCenterApi.src.Application.Interfaces;
 public interface ISolicitationService
 {
     Task<ICollection<SolicitationDto>> GetByStudentId(int studentId);
-    Task<ICollection<SolicitationDto>> GetByStatusId(int statusId);
+    Task<ICollection<SolicitationDto>> GetByStatusId(int statusId, int studentId);
     Task<SolicitationDto> GetById(int id);
     Task<bool> Delete(SolicitationDto solicitationDto);
     Task<SolicitationDto> Post(SolicitationCreateDto solicitationCreateDto);

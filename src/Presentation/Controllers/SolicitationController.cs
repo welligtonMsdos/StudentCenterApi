@@ -15,11 +15,11 @@ public class SolicitationController : BaseController
     }
 
     [HttpGet("[Action]")]
-    public async Task<IActionResult> GetByStatusId(int statusId)
+    public async Task<IActionResult> GetByStatusId(int statusId, int studentId)
     {
         try
         {
-            var solicitation = await _service.GetByStatusId(statusId);
+            var solicitation = await _service.GetByStatusId(statusId, studentId);
 
             if (solicitation == null) return NotFound();
 
