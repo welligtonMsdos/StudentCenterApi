@@ -1,6 +1,3 @@
 ﻿namespace StudentCenterApi.src.Application.DTOs.Status;
 
-public class StatusCreateDto
-{
-    public string Description { get; set; }
-}
+public record StatusCreateDto(string Description) {}

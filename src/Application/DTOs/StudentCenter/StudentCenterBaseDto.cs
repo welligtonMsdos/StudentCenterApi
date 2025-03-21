@@ -1,8 +1,6 @@
 ﻿namespace StudentCenterApi.src.Application.DTOs.StudentCenter;
 
-public class StudentCenterBaseDto
-{
-    public int Id { get; set; }
-    public string Description { get; set; }
-    public string Page { get; set; }
-}
+public record StudentCenterBaseDto(int Id,
+                                   string Description,
+                                   string Page) {}
+
