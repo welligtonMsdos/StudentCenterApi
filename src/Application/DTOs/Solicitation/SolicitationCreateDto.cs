@@ -1,8 +1,8 @@
 ﻿namespace StudentCenterApi.src.Application.DTOs.Solicitation;
 
-public class SolicitationCreateDto
-{
-    public int StudentId { get; set; }
-    public string Description { get; set; }   
-    public int RequestTypeId { get; set; }
+public record SolicitationCreateDto(int StudentId, 
+                                    string Description, 
+                                    int StatusId, 
+                                    int RequestTypeId) {}
+
 }

@@ -6,7 +6,7 @@ public abstract class BaseController : ControllerBase
 {
     protected BaseController() { }
 
-    protected new ActionResult Sucess(object result, bool isUpdate = false)
+    protected ActionResult Sucess(object result, bool isUpdate = false)
     {
         return Ok(new
         {
@@ -16,7 +16,7 @@ public abstract class BaseController : ControllerBase
         });
     }
 
-    protected new ActionResult Sucess(string msg)
+    protected ActionResult Sucess(string msg)
     {
         return Ok(new
         {
@@ -25,7 +25,7 @@ public abstract class BaseController : ControllerBase
         });
     }
 
-    protected new ActionResult Error(Exception ex)
+    protected ActionResult Error(Exception ex)
     {
         if (ex.InnerException == null)
         {
@@ -43,7 +43,7 @@ public abstract class BaseController : ControllerBase
         });
     }
 
-    protected new ActionResult Error(string erro)
+    protected ActionResult Error(string erro)
     {
         return Ok(new
         {
