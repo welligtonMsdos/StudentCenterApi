@@ -2,6 +2,7 @@
 using StudentCenterApi.src.Domain.Interfaces;
 using StudentCenterApi.src.Domain.Model;
 using StudentCenterApi.src.Infrastructure.Data.Context;
+using StudentCenterApi.src.Infrastructure.Enum;
 
 namespace StudentCenterApi.src.Infrastructure.Data.Repositories;
 
@@ -21,6 +22,18 @@ public class SolicitationRepository : ISolicitationRepository
         var result = await _context.SaveChangesAsync();
 
         return result > 0;
+    }
+
+    public async Task<ICollection<Solicitation>> GetAllPendingStatuses()
+    {
+        var solicitation = await _context.Solicitation
+                            .Include(x => x.Status)
+                            .Include(x => x.RequestType)
+                            .AsNoTracking()
+                            .Where(x => x.StatusId == (int)EStatus.Pending)                            
+                            .ToListAsync();
+
+        return solicitation;
     }
 
     public async Task<Solicitation> GetById(int id)
@@ -66,6 +79,7 @@ public class SolicitationRepository : ISolicitationRepository
     public async Task<Solicitation> Post(Solicitation entity)
     {
         entity.Active = true;
+        entity.StatusId = (int)EStatus.Pending;
 
         _context.Solicitation.Add(entity);
 

@@ -48,6 +48,23 @@ public class SolicitationController : BaseController
         }
     }
 
+    [HttpGet("[Action]")]
+    public async Task<IActionResult> GetAllPendingStatuses()
+    {
+        try
+        {
+            var solicitation = await _service.GetAllPendingStatuses();
+
+            if (solicitation == null) return NotFound();
+
+            return Ok(solicitation);
+        }
+        catch (Exception ex)
+        {
+            return Error(ex);
+        }
+    }
+
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
