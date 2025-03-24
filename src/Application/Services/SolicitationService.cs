@@ -25,6 +25,11 @@ public class SolicitationService : ISolicitationService
         return await _repository.Delete(_mapper.Map<Solicitation>(solicitationDto));
     }
 
+    public async Task<ICollection<SolicitationDto>> GetAllPendingStatuses()
+    {
+        return _mapper.Map<ICollection<SolicitationDto>>(await _repository.GetAllPendingStatuses());
+    }
+
     public async Task<SolicitationDto> GetById(int id)
     {
         return _mapper.Map<SolicitationDto>(await _repository.GetById(id));
