@@ -5,4 +5,4 @@ public record SolicitationCreateDto(int StudentId,
                                     int StatusId, 
                                     int RequestTypeId) {}
 
-}
+
