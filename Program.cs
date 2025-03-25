@@ -8,17 +8,26 @@ namespace StudentCenterApi
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            var builder = WebApplication.CreateBuilder(args);            
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin", policy =>
+                {
+                    policy.WithOrigins("https://localhost:7260")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
 
             var connectionString = builder.Configuration.GetConnectionString("SCConnection");
 
             builder.Services.AddDbContext<StudentCenterContext>(options => options.UseSqlServer(connectionString));
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            
             builder.Services.AddEndpointsApiExplorer();
+
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -26,18 +35,18 @@ namespace StudentCenterApi
             builder.Services.AddInterfaces(builder.Configuration);
 
             var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
+           
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
+            app.UseCors("AllowSpecificOrigin");
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
