@@ -70,4 +70,11 @@ public class SolicitationService : ISolicitationService
 
         return _mapper.Map<SolicitationDto>(await _repository.Put(solicitation));
     }
+
+    public async Task<SolicitationDto> UpdateStatus(SolicitationUpdateStatusDto solicitationUpdateStatusDto)
+    {
+        var solicitation = _mapper.Map<Solicitation>(solicitationUpdateStatusDto);
+
+        return _mapper.Map<SolicitationDto>(await _repository.UpdateStatus(solicitation));
+    }
 }

@@ -25,6 +25,7 @@ public class StudentCenterProfile : Profile
 
         CreateMap<Solicitation, SolicitationCreateDto>().ReverseMap();
         CreateMap<Solicitation, SolicitationUpdateDto>().ReverseMap();
+        CreateMap<Solicitation, SolicitationUpdateStatusDto>().ReverseMap();
         CreateMap<Solicitation, SolicitationDto>()
             .ForMember(x => x.DescriptionStatus, x => x.MapFrom(x => x.Status.Description))
             .ForMember(x => x.DescriptionRequestType, x => x.MapFrom(x => x.RequestType.Description))

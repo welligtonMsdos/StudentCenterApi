@@ -114,4 +114,15 @@ public class SolicitationRepository : ISolicitationRepository
 
         return entity;
     }
+
+    public async Task<Solicitation> UpdateStatus(Solicitation entity)
+    {
+        _context.Solicitation.Attach(entity);
+
+        _context.Entry(entity).Property(x => x.StatusId).IsModified = true;
+
+        await _context.SaveChangesAsync();
+
+        return entity;
+    }
 }

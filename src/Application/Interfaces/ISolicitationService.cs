@@ -11,4 +11,5 @@ public interface ISolicitationService
     Task<bool> Delete(SolicitationDto solicitationDto);
     Task<SolicitationDto> Post(SolicitationCreateDto solicitationCreateDto);
     Task<SolicitationDto> Put(SolicitationUpdateDto solicitationUpdateDto);
+    Task<SolicitationDto> UpdateStatus(SolicitationUpdateStatusDto solicitationUpdateStatusDto);
 }
