@@ -12,12 +12,10 @@ namespace StudentCenterApi
 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowSpecificOrigin", policy =>
-                {
-                    policy.WithOrigins("https://localhost:7260")
-                          .AllowAnyHeader()
-                          .AllowAnyMethod();
-                });
+                options.AddPolicy("AllowAll", builder =>
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader());
             });
 
             var connectionString = builder.Configuration.GetConnectionString("SCConnection");
@@ -40,9 +38,9 @@ namespace StudentCenterApi
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-            }
+            }           
 
-            app.UseCors("AllowSpecificOrigin");
+            app.UseCors("AllowAll");
 
             app.UseHttpsRedirection();
 
