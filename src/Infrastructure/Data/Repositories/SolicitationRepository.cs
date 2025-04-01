@@ -123,6 +123,14 @@ public class SolicitationRepository : ISolicitationRepository
 
         await _context.SaveChangesAsync();
 
+        await _context.Entry(entity)
+                  .Reference(s => s.Status)
+                  .LoadAsync();
+
+        await _context.Entry(entity)
+                  .Reference(s => s.RequestType)
+                  .LoadAsync();
+
         return entity;
     }
 }

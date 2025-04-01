@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using StudentCenterApi.src.Infrastructure.Data.Context;
 using StudentCenterApi.src.Infrastructure.Dependency_Injection;
+using StudentCenterApi.src.Infrastructure.Util;
 
 namespace StudentCenterApi
 {
@@ -8,15 +9,19 @@ namespace StudentCenterApi
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);            
+            var builder = WebApplication.CreateBuilder(args);        
 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowAll", builder =>
-                    builder.AllowAnyOrigin()
-                           .AllowAnyMethod()
-                           .AllowAnyHeader());
+                options.AddPolicy("CorsPolicy", builder =>
+                {
+                    builder.WithOrigins("https://localhost:7236", "https://localhost:7260") 
+                           .AllowCredentials() 
+                           .AllowAnyHeader()   
+                           .AllowAnyMethod();  
+                });
             });
+
 
             var connectionString = builder.Configuration.GetConnectionString("SCConnection");
 
@@ -30,7 +35,9 @@ namespace StudentCenterApi
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            builder.Services.AddInterfaces(builder.Configuration);
+            builder.Services.AddInterfaces(builder.Configuration);     
+            
+            builder.Services.AddSignalR();
 
             var app = builder.Build();
            
@@ -38,15 +45,17 @@ namespace StudentCenterApi
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-            }           
+            }
 
-            app.UseCors("AllowAll");
+            app.UseCors("CorsPolicy");
 
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
             app.MapControllers();
+
+            app.MapHub<StatusHub>("/statusHub");
 
             app.Run();
         }

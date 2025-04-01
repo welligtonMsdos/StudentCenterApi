@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.SignalR;
 using StudentCenterApi.src.Application.DTOs.Solicitation;
 using StudentCenterApi.src.Application.Interfaces;
 using StudentCenterApi.src.Domain.Interfaces;
 using StudentCenterApi.src.Domain.Model;
 using StudentCenterApi.src.Domain.Validation;
+using StudentCenterApi.src.Infrastructure.Util;
 
 namespace StudentCenterApi.src.Application.Services;
 
@@ -12,12 +14,15 @@ public class SolicitationService : ISolicitationService
 {
     private readonly ISolicitationRepository _repository;
     private readonly IMapper _mapper;
+    private readonly IHubContext<StatusHub> _hubContext;
 
     public SolicitationService(ISolicitationRepository repository,
-                               IMapper mapper)
+                               IMapper mapper,
+                               IHubContext<StatusHub> hubContext)
     {
         _repository = repository;
         _mapper = mapper;
+        _hubContext = hubContext;
     }
 
     public async Task<bool> Delete(SolicitationDto solicitationDto)
@@ -75,6 +80,10 @@ public class SolicitationService : ISolicitationService
     {
         var solicitation = _mapper.Map<Solicitation>(solicitationUpdateStatusDto);
 
-        return _mapper.Map<SolicitationDto>(await _repository.UpdateStatus(solicitation));
+        var update = await _repository.UpdateStatus(solicitation);
+
+        await _hubContext.Clients.All.SendAsync("ReceiveIdAndDescription", update.Id, update.Status.Description.ToLower());
+
+        return _mapper.Map<SolicitationDto>(update);
     }
 }
