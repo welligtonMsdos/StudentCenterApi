@@ -11,4 +11,5 @@ public interface ISolicitationRepository
     Task<Solicitation> Post(Solicitation entity);
     Task<Solicitation> Put(Solicitation entity);
     Task<bool> Delete(Solicitation entity);
+    Task<Solicitation> UpdateStatus(Solicitation entity);
 }

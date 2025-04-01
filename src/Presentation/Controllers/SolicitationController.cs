@@ -138,4 +138,19 @@ public class SolicitationController : BaseController
             return Error(ex);
         }
     }
+
+    [HttpPatch]
+    public async Task<ActionResult<SolicitationDto>> UpdateStatus([FromBody] SolicitationUpdateStatusDto dto)
+    {
+        try
+        {
+            var update = await _service.UpdateStatus(dto);
+
+            return Sucess(update, true);
+        }
+        catch (Exception ex)
+        {
+            return Error(ex);
+        }
+    }
 }
