@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StudentCenterApi.src.Application.DTOs.Solicitation;
 using StudentCenterApi.src.Application.Interfaces;
 
@@ -14,6 +15,7 @@ public class SolicitationController : BaseController
         _service = service;
     }
 
+    [Authorize]
     [HttpGet("[Action]")]
     public async Task<IActionResult> GetByStatusId(int statusId, int studentId)
     {
@@ -31,6 +33,7 @@ public class SolicitationController : BaseController
         }
     }
 
+    [Authorize]
     [HttpGet("[Action]")]
     public async Task<IActionResult> GetByStudentId(int studentId)
     {
@@ -48,6 +51,7 @@ public class SolicitationController : BaseController
         }
     }
 
+    [Authorize]
     [HttpGet("[Action]")]
     public async Task<IActionResult> GetAllPendingStatuses()
     {
@@ -65,6 +69,7 @@ public class SolicitationController : BaseController
         }
     }
 
+    [Authorize]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -82,6 +87,7 @@ public class SolicitationController : BaseController
         }
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
     {
@@ -103,6 +109,7 @@ public class SolicitationController : BaseController
         }
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult<SolicitationDto>> Post([FromBody] SolicitationCreateDto dto)
     {
@@ -120,6 +127,7 @@ public class SolicitationController : BaseController
         }
     }
 
+    [Authorize]
     [HttpPut]
     public async Task<ActionResult<SolicitationDto>> Put([FromBody] SolicitationUpdateDto dto)
     {
@@ -139,6 +147,7 @@ public class SolicitationController : BaseController
         }
     }
 
+    [Authorize]
     [HttpPatch]
     public async Task<ActionResult<SolicitationDto>> UpdateStatus([FromBody] SolicitationUpdateStatusDto dto)
     {

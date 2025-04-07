@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StudentCenterApi.src.Application.DTOs.RequestType;
 using StudentCenterApi.src.Application.Interfaces;
 
@@ -14,7 +15,8 @@ public class RequestTypeController : BaseController
         _service = service;
     }
 
-    [HttpGet]
+    [Authorize]
+    [HttpGet("[Action]")]
     public async Task<IActionResult> GetAll()
     {
         try
@@ -27,6 +29,7 @@ public class RequestTypeController : BaseController
         }
     }
 
+    [Authorize]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -44,6 +47,7 @@ public class RequestTypeController : BaseController
         }
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
     {
@@ -65,6 +69,7 @@ public class RequestTypeController : BaseController
         }
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult<RequestTypeDto>> Post([FromBody] RequestTypeCreateDto dto)
     {
@@ -82,6 +87,7 @@ public class RequestTypeController : BaseController
         }
     }
 
+    [Authorize]
     [HttpPut]
     public async Task<ActionResult<RequestTypeDto>> Put([FromBody] RequestTypeUpdateDto dto)
     {

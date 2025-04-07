@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StudentCenterApi.src.Application.DTOs.Status;
 using StudentCenterApi.src.Application.Interfaces;
 
@@ -14,6 +15,7 @@ public class StatusController : BaseController
         _service = service;
     }
 
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -27,6 +29,7 @@ public class StatusController : BaseController
         }
     }
 
+    [Authorize]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -44,6 +47,7 @@ public class StatusController : BaseController
         }
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
     {
@@ -65,6 +69,7 @@ public class StatusController : BaseController
         }
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult<StatusDto>> Post([FromBody] StatusCreateDto dto)
     {
@@ -82,6 +87,7 @@ public class StatusController : BaseController
         }
     }
 
+    [Authorize]
     [HttpPut]
     public async Task<ActionResult<StatusDto>> Put([FromBody] StatusUpdateDto dto)
     {
