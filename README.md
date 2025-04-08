@@ -2,6 +2,15 @@
 
 > This API is responsible for managing requests made by students at a higher education institution. It allows the registration, tracking, and management of requests, organizing them by types and statuses.
 
+## Skills
+
+<div style="display: flex; gap: 10px;">
+  <img src="https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white"/>
+  <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Microsoft_SQL_Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white"/>
+</div>
+<br>
+
 <details>
   <summary>RequestType</summary>
 
