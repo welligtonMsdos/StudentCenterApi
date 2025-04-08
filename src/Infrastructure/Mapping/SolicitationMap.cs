@@ -12,6 +12,10 @@ public class SolicitationMap : IEntityTypeConfiguration<Solicitation>
 
         builder.HasKey(x => x.Id);
 
+        builder.Property(p => p.StudentId)
+            .HasColumnType("varchar(24)")           
+            .IsRequired();
+
         builder.Property(p => p.Description)
             .HasColumnType("varchar(300)")
             .IsRequired();

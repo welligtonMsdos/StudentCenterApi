@@ -17,7 +17,7 @@ public class SolicitationController : BaseController
 
     [Authorize]
     [HttpGet("[Action]")]
-    public async Task<IActionResult> GetByStatusId(int statusId, int studentId)
+    public async Task<IActionResult> GetByStatusId(int statusId, string studentId)
     {
         try
         {
@@ -35,7 +35,7 @@ public class SolicitationController : BaseController
 
     [Authorize]
     [HttpGet("[Action]")]
-    public async Task<IActionResult> GetByStudentId(int studentId)
+    public async Task<IActionResult> GetByStudentId(string studentId)
     {
         try
         {
