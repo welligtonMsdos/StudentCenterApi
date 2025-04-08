@@ -47,7 +47,7 @@ public class SolicitationRepository : ISolicitationRepository
         return solicitation;
     }
 
-    public async Task<ICollection<Solicitation>> GetByStatusId(int statusId, int studentId)
+    public async Task<ICollection<Solicitation>> GetByStatusId(int statusId, string studentId)
     {
         if(statusId == 0) return await GetByStudentId(studentId);
         
@@ -56,14 +56,14 @@ public class SolicitationRepository : ISolicitationRepository
                             .Include(x => x.RequestType)
                             .AsNoTracking()
                             .Where(x => x.StatusId == statusId && 
-                                   x.StudentId == studentId)
+                                        x.StudentId == studentId)
                             .OrderBy(x => x.Description)
                             .ToListAsync();
 
         return solicitation;
     }
 
-    public async Task<ICollection<Solicitation>> GetByStudentId(int studentId)
+    public async Task<ICollection<Solicitation>> GetByStudentId(string studentId)
     {
         var solicitation = await _context.Solicitation
                             .Include(x => x.Status)

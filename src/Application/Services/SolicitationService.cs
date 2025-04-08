@@ -40,12 +40,12 @@ public class SolicitationService : ISolicitationService
         return _mapper.Map<SolicitationDto>(await _repository.GetById(id));
     }
 
-    public async Task<ICollection<SolicitationDto>> GetByStatusId(int statusId, int studentId)
+    public async Task<ICollection<SolicitationDto>> GetByStatusId(int statusId, string studentId)
     {
         return _mapper.Map<ICollection<SolicitationDto>>(await _repository.GetByStatusId(statusId, studentId));
     }
 
-    public async Task<ICollection<SolicitationDto>> GetByStudentId(int studentId)
+    public async Task<ICollection<SolicitationDto>> GetByStudentId(string studentId)
     {
         return _mapper.Map<ICollection<SolicitationDto>>(await _repository.GetByStudentId(studentId));
     }
