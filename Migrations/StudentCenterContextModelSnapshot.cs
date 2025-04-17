@@ -70,8 +70,7 @@ namespace StudentCenterApi.Migrations
 
                     b.HasIndex("RequestTypeId");
 
-                    b.HasIndex("StatusId")
-                        .HasDatabaseName("IX_StatusId");
+                    b.HasIndex("StatusId");
 
                     b.ToTable("Solicitation", (string)null);
                 });

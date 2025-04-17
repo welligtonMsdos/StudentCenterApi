@@ -22,8 +22,8 @@ public class StudentCenterContext : DbContext
         modelBuilder.ApplyConfiguration(new RequestTypeMap());
         modelBuilder.ApplyConfiguration(new SolicitationMap());
        
-        modelBuilder.Entity<Solicitation>()
-            .HasIndex(e => e.StatusId)
-            .HasDatabaseName("IX_StatusId");
+        //modelBuilder.Entity<Solicitation>()
+        //    .HasIndex(e => e.StatusId)
+        //    .HasDatabaseName("IX_StatusId");
     }
 }
