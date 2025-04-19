@@ -19,7 +19,7 @@ namespace StudentCenterApi
             {
                 options.AddPolicy("CorsPolicy", builder =>
                 {
-                    builder.WithOrigins("https://localhost:7236", "https://localhost:7260") 
+                    builder.WithOrigins("https://studentcenterweb-f9bucggxcjcrescj.brazilsouth-01.azurewebsites.net", "https://localhost:7260") 
                            .AllowCredentials() 
                            .AllowAnyHeader()   
                            .AllowAnyMethod();  
