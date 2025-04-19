@@ -2,7 +2,7 @@
 
 public enum EStatus
 {
-    Pending = 1,
-    Completed = 2,
-    Rejected = 3
+    Pending = 3,
+    Completed = 1,
+    Rejected = 2
 }
