@@ -20,9 +20,9 @@ public class SolicitationMap : IEntityTypeConfiguration<Solicitation>
             .HasColumnType("varchar(300)")
             .IsRequired();
 
-        builder.Property(p => p.Active)
-           .HasColumnType("bit")
-           .IsRequired();
+        //builder.Property(p => p.Active)
+        //   .HasColumnType("bit")
+        //   .IsRequired();
 
         builder.HasQueryFilter(p => p.Active);
 

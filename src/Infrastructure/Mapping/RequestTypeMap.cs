@@ -16,9 +16,9 @@ public class RequestTypeMap : IEntityTypeConfiguration<RequestType>
             .HasColumnType("varchar(100)")
             .IsRequired();
 
-        builder.Property(p => p.Active)
-           .HasColumnType("bit")
-           .IsRequired();
+        //builder.Property(p => p.Active)
+        //   .HasColumnType("bit")
+        //   .IsRequired();
 
         builder.HasQueryFilter(p => p.Active);
     }

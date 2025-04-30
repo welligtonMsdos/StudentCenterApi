@@ -1,5 +1,5 @@
 ﻿namespace StudentCenterApi.src.Domain.Model;
-
+             
 public class StudentCenterBase
 {
     public int Id { get; set; }
