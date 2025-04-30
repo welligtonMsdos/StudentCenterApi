@@ -20,7 +20,7 @@ public class StudentCenterContext : DbContext
         modelBuilder.ApplyConfiguration(new StatusMap());
         modelBuilder.ApplyConfiguration(new StudentCenterBaseMap());
         modelBuilder.ApplyConfiguration(new RequestTypeMap());
-        modelBuilder.ApplyConfiguration(new SolicitationMap());
+        //modelBuilder.ApplyConfiguration(new SolicitationMap());
        
         //modelBuilder.Entity<Solicitation>()
         //    .HasIndex(e => e.StatusId)

@@ -32,7 +32,9 @@ namespace StudentCenterApi
 
             var connectionString = builder.Configuration.GetConnectionString("SCConnection");
 
-            builder.Services.AddDbContext<StudentCenterContext>(options => options.UseSqlServer(connectionString));
+            //builder.Services.AddDbContext<StudentCenterContext>(options => options.UseSqlServer(connectionString));
+
+            builder.Services.AddDbContext<StudentCenterContext>(options => options.UseNpgsql(connectionString));
 
             builder.Services.AddControllers();
             

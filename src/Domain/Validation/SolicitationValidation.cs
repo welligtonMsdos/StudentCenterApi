@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using StudentCenterApi.src.Domain.Enum;
 using StudentCenterApi.src.Domain.Model;
 
 namespace StudentCenterApi.src.Domain.Validation;
@@ -7,10 +8,10 @@ public class SolicitationValidation : AbstractValidator<Solicitation>
 {
     public SolicitationValidation()
     {
-        RuleFor(x => x.Description).NotEmpty().WithMessage("Description cannot be empty");
-        RuleFor(x => x.Description).MinimumLength(20).WithMessage("Description must be at least 20 characters");
-        RuleFor(x => x.Description).MaximumLength(300).WithMessage("Description can be at most 300 characters");  
-        RuleFor(c => c.RequestTypeId).NotEmpty().WithMessage("RequestTypeId cannot be empty");
-        RuleFor(c => c.StudentId).NotEmpty().WithMessage("StudentId cannot be empty");
+        RuleFor(x => x.Description).NotEmpty().WithMessage(EMsgValidation.MSG_REQUIRED);
+        RuleFor(x => x.Description).MinimumLength(20).WithMessage(string.Format(EMsgValidation.MSG_MIN_LENGTH, 20));
+        RuleFor(x => x.Description).MaximumLength(300).WithMessage(string.Format(EMsgValidation.MSG_MAX_LENGTH, 300));
+        RuleFor(c => c.RequestTypeId).NotEmpty().WithMessage(EMsgValidation.MSG_REQUIRED);
+        RuleFor(c => c.StudentId).NotEmpty().WithMessage(EMsgValidation.MSG_REQUIRED);
     }
 }

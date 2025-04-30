@@ -61,7 +61,7 @@ public class RequestTypeController : BaseController
 
             if (!result) return Error("Error when deleting record");
 
-            return Sucess("successfully deleted");
+            return Sucess("Excluído com sucesso");
         }
         catch (Exception ex)
         {

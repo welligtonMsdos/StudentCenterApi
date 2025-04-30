@@ -19,9 +19,11 @@ public class StudentCenterBaseMap : IEntityTypeConfiguration<StudentCenterBase>
         builder.Property(p => p.Page)
             .HasColumnType("varchar(20)");
 
-        builder.Property(p => p.Active)
-           .HasColumnType("bit")
-           .IsRequired();
+        //***SQLSERVER***
+        //builder.Property(p => p.Active)
+        //   .HasColumnType("bit")
+        //   .IsRequired();
+        //          
 
         builder.HasQueryFilter(p => p.Active);
     }
