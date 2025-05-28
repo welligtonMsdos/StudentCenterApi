@@ -7,7 +7,7 @@ public interface ISolicitationService
     Task<ICollection<SolicitationDto>> GetByStudentId(string studentId);
     Task<ICollection<SolicitationDto>> GetByStatusId(int statusId, string studentId);
     Task<ICollection<SolicitationDto>> GetAllPendingStatuses();
-    Task<SolicitationDto> GetById(int id);
+    Task<SolicitationDto> GetById(int id);   
     Task<bool> Delete(SolicitationDto solicitationDto);
     Task<SolicitationDto> Post(SolicitationCreateDto solicitationCreateDto);
     Task<SolicitationDto> Put(SolicitationUpdateDto solicitationUpdateDto);

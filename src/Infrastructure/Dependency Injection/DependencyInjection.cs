@@ -21,6 +21,8 @@ public static class DependencyInjection
         services.AddScoped<ISolicitationRepository, SolicitationRepository>();
         services.AddScoped<ISolicitationService, SolicitationService>();
 
+        services.AddScoped<IDashboardService, DashboardService>();
+
         return services;
     }
 }
