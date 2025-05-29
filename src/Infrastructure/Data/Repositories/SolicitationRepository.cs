@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StudentCenterApi.src.Application.DTOs.Solicitation;
 using StudentCenterApi.src.Domain.Interfaces;
 using StudentCenterApi.src.Domain.Model;
 using StudentCenterApi.src.Infrastructure.Data.Context;
@@ -71,6 +72,17 @@ public class SolicitationRepository : ISolicitationRepository
                             .AsNoTracking()
                             .Where(x => x.StudentId == studentId)
                             .OrderBy(x => x.Description)
+                            .ToListAsync();
+
+        return solicitation;
+    }
+
+    public async Task<ICollection<SolicitationDashboardDto>> GetDashboardByStudentId(string studentId)
+    {
+        var solicitation = await _context.Solicitation
+                            .Where(x => x.StudentId == studentId) 
+                            .GroupBy(x => new { x.StudentId, x.StatusId })
+                            .Select(x => new SolicitationDashboardDto(x.Key.StudentId, x.Key.StatusId, x.Count()))
                             .ToListAsync();
 
         return solicitation;

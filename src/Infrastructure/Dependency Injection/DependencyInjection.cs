@@ -21,6 +21,11 @@ public static class DependencyInjection
         services.AddScoped<ISolicitationRepository, SolicitationRepository>();
         services.AddScoped<ISolicitationService, SolicitationService>();
 
+        services.AddScoped<ITimeLineRepository, TimeLineRepository>();
+        services.AddScoped<ITimeLineService, TimeLineService>();
+
+        services.AddScoped<IDashboardService, DashboardService>();
+
         return services;
     }
 }

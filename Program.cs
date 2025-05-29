@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using StudentCenterApi.src.Application.Services;
 using StudentCenterApi.src.Infrastructure.Data.Context;
 using StudentCenterApi.src.Infrastructure.Dependency_Injection;
 using StudentCenterApi.src.Infrastructure.Util;
@@ -28,7 +29,6 @@ namespace StudentCenterApi
                            .AllowAnyMethod();  
                 });
             });
-
 
             var connectionString = builder.Configuration.GetConnectionString("SCConnection");
 
@@ -93,6 +93,8 @@ namespace StudentCenterApi
                     IssuerSigningKey = new SymmetricSecurityKey(key)
                 };
             });
+
+            builder.Services.AddHostedService<DashboardBackgroundService>();
 
             var app = builder.Build();
            
