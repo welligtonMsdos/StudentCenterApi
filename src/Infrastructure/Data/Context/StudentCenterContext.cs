@@ -14,14 +14,17 @@ public class StudentCenterContext : DbContext
     public DbSet<StudentCenterBase> StudentCenterBase { get; set; }
     public DbSet<RequestType> RequestType { get; set; }
     public DbSet<Solicitation> Solicitation { get; set; }
+    public DbSet<TimeLine> TimeLine { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new StatusMap());
         modelBuilder.ApplyConfiguration(new StudentCenterBaseMap());
         modelBuilder.ApplyConfiguration(new RequestTypeMap());
+        modelBuilder.ApplyConfiguration(new TimeLineMap());
+
         //modelBuilder.ApplyConfiguration(new SolicitationMap());
-       
+
         //modelBuilder.Entity<Solicitation>()
         //    .HasIndex(e => e.StatusId)
         //    .HasDatabaseName("IX_StatusId");

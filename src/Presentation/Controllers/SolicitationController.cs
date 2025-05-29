@@ -9,10 +9,11 @@ namespace StudentCenterApi.src.Presentation.Controllers;
 [Route("api/v1/[controller]")]
 public class SolicitationController : BaseController
 {
-    private readonly ISolicitationService _service;
+    private readonly ISolicitationService _service;    
+
     public SolicitationController(ISolicitationService service)
     {
-        _service = service;
+        _service = service;        
     }
 
     [Authorize]
@@ -112,14 +113,15 @@ public class SolicitationController : BaseController
     [Authorize]
     [HttpPost]
     public async Task<ActionResult<SolicitationDto>> Post([FromBody] SolicitationCreateDto dto)
-    {
+    {      
         try
         {
             var result = await _service.Post(dto);
 
             var created = CreatedAtAction(nameof(Post), nameof(SolicitationController), new { id = result.Id }, result);
-
+           
             return Sucess(created);
+          
         }
         catch (Exception ex)
         {

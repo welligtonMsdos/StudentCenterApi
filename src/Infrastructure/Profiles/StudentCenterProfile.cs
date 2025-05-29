@@ -3,6 +3,7 @@ using StudentCenterApi.src.Application.DTOs.RequestType;
 using StudentCenterApi.src.Application.DTOs.Solicitation;
 using StudentCenterApi.src.Application.DTOs.Status;
 using StudentCenterApi.src.Application.DTOs.StudentCenter;
+using StudentCenterApi.src.Application.DTOs.TimeLine;
 using StudentCenterApi.src.Domain.Model;
 
 namespace StudentCenterApi.src.Infrastructure.Profiles;
@@ -11,6 +12,8 @@ public class StudentCenterProfile : Profile
 {
     public StudentCenterProfile()
     {
+        CreateMap<TimeLine, TimeLineDto>().ReverseMap();       
+
         CreateMap<Status, StatusDto>().ReverseMap();
         CreateMap<Status, StatusCreateDto>().ReverseMap();
         CreateMap<Status, StatusUpdateDto>().ReverseMap();
