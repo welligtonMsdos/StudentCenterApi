@@ -36,6 +36,8 @@ namespace StudentCenterApi
 
             builder.Services.AddDbContext<StudentCenterContext>(options => options.UseNpgsql(connectionString));
 
+            builder.Services.AddSingleton<AuthContext>();
+
             builder.Services.AddControllers();
             
             builder.Services.AddEndpointsApiExplorer();

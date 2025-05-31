@@ -9,7 +9,7 @@ public interface ISolicitationRepository
     Task<ICollection<Solicitation>> GetByStatusId(int statusId, string studentId);
     Task<ICollection<Solicitation>> GetAllPendingStatuses();
     Task<Solicitation> GetById(int id);
-    Task<ICollection<SolicitationDashboardDto>> GetDashboardByStudentId(string studentId);
+    Task<ICollection<SolicitationDashboardDto>> GetDashboardByStudentId();
     Task<Solicitation> Post(Solicitation entity);
     Task<Solicitation> Put(Solicitation entity);
     Task<bool> Delete(Solicitation entity);

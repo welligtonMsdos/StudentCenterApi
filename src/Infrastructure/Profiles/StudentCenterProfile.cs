@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using StudentCenterApi.src.Application.DTOs.Dashboard;
 using StudentCenterApi.src.Application.DTOs.RequestType;
 using StudentCenterApi.src.Application.DTOs.Solicitation;
 using StudentCenterApi.src.Application.DTOs.Status;
@@ -12,6 +13,8 @@ public class StudentCenterProfile : Profile
 {
     public StudentCenterProfile()
     {
+        CreateMap<Dashboard, DashboardCreateDto>().ReverseMap();
+
         CreateMap<TimeLine, TimeLineDto>().ReverseMap();       
 
         CreateMap<Status, StatusDto>().ReverseMap();

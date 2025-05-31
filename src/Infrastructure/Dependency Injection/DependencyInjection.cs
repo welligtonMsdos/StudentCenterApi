@@ -26,6 +26,8 @@ public static class DependencyInjection
 
         services.AddScoped<IDashboardService, DashboardService>();
 
+        services.AddScoped<IDashboardRepository, DashboardRepository>();
+
         return services;
     }
 }
