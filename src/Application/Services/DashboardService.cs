@@ -60,7 +60,7 @@ public class DashboardService : IDashboardService
             {
                 dashboardCreateDto = new DashboardCreateDto();
                 
-                dashboardCreateDto.LastUpdate = DateTime.UtcNow.ToLocalTime();
+                dashboardCreateDto.LastUpdate = DateTime.Now.AddHours(-3);
                 dashboardCreateDto.UserId = item.studentId;               
                 dashboardCreateDto.CountCompleted = item.countCompleted;
                 dashboardCreateDto.CountDenied = item.countDenied;
