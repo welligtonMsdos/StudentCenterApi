@@ -19,10 +19,15 @@ public class DashboardBackgroundService : BackgroundService
             {
                 var dashboardService = scope.ServiceProvider.GetRequiredService<IDashboardService>();
 
-                await dashboardService.GetDashboardByStudentId("67f42b4a406f3f471ac3ebcf");
+                await dashboardService.DeleteByDashboard();
+
+                var listDashboard = await dashboardService.GetDashboard();
+
+                if (listDashboard.Count > 0)
+                    await dashboardService.AddDashboard(listDashboard);
             }
 
-            await Task.Delay(TimeSpan.FromMinutes(10), stoppingToken);
+            await Task.Delay(TimeSpan.FromMinutes(45), stoppingToken);
         }
     }
 }

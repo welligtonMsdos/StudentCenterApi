@@ -77,12 +77,17 @@ public class SolicitationRepository : ISolicitationRepository
         return solicitation;
     }
 
-    public async Task<ICollection<SolicitationDashboardDto>> GetDashboardByStudentId(string studentId)
+    public async Task<ICollection<SolicitationDashboardDto>> GetDashboardByStudentId()
     {
-        var solicitation = await _context.Solicitation
-                            .Where(x => x.StudentId == studentId) 
-                            .GroupBy(x => new { x.StudentId, x.StatusId })
-                            .Select(x => new SolicitationDashboardDto(x.Key.StudentId, x.Key.StatusId, x.Count()))
+        var solicitation = await _context.Solicitation                            
+                            .GroupBy(x => x.StudentId)
+                             .Select(g => new SolicitationDashboardDto
+                             {
+                                 studentId = g.Key,
+                                 countCompleted = g.Count(s => s.StatusId == 1),
+                                 countDenied = g.Count(s => s.StatusId == 2),
+                                 countPending = g.Count(s => s.StatusId == 3)
+                             })
                             .ToListAsync();
 
         return solicitation;
