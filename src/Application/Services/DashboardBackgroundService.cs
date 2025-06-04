@@ -27,7 +27,7 @@ public class DashboardBackgroundService : BackgroundService
                     await dashboardService.AddDashboard(listDashboard);
             }
 
-            await Task.Delay(TimeSpan.FromMinutes(45), stoppingToken);
+            await Task.Delay(TimeSpan.FromMinutes(720), stoppingToken);
         }
     }
 }
