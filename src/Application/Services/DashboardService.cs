@@ -73,4 +73,15 @@ public class DashboardService : IDashboardService
 
         return listDashboard;
     }
+
+    public async Task<ICollection<DashboardDto>> GetDashboardByStudentId(string studentId)
+    {
+        using (var scope = _serviceProvider.CreateScope())
+        {
+            var dashboardRepository = scope.ServiceProvider.GetRequiredService<IDashboardRepository>();
+
+            return _mapper.Map<ICollection<DashboardDto>>(await dashboardRepository.GetDashboardByStudentId(studentId));
+        }
+    }
+
 }

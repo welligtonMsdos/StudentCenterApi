@@ -27,4 +27,13 @@ public class DashboardRepository : IDashboardRepository
 
         return true;
     }
+
+    public async Task<ICollection<Dashboard>> GetDashboardByStudentId(string studentId)
+    {
+        var dashboards = await _context.Dashboards
+            .Find(d => d.UserId == studentId)
+            .ToListAsync();
+
+        return dashboards;
+    }
 }

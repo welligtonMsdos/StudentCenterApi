@@ -14,6 +14,7 @@ public class StudentCenterProfile : Profile
     public StudentCenterProfile()
     {
         CreateMap<Dashboard, DashboardCreateDto>().ReverseMap();
+        CreateMap<Dashboard, DashboardDto>().ReverseMap();
 
         CreateMap<TimeLine, TimeLineDto>().ReverseMap();       
 
