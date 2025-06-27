@@ -23,7 +23,8 @@ namespace StudentCenterApi
                     builder.WithOrigins("https://studentcenterweb-f9bucggxcjcrescj.brazilsouth-01.azurewebsites.net", 
                                         "https://studentcenteracademic-b8b6ajakhcg4dsbx.brazilsouth-01.azurewebsites.net",
                                         "https://localhost:7260",
-                                        "https://localhost:7236") 
+                                        "https://localhost:7291",
+                                        "http://localhost:5001") 
                            .AllowCredentials() 
                            .AllowAnyHeader()   
                            .AllowAnyMethod();  
@@ -91,7 +92,8 @@ namespace StudentCenterApi
                     ValidateAudience = false,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = "https://studentcenterauthapi-gna4fkhdgmbyg8cc.brazilsouth-01.azurewebsites.net",
+                    //ValidIssuer = "https://studentcenterauthapi-gna4fkhdgmbyg8cc.brazilsouth-01.azurewebsites.net",
+                    ValidIssuer = "http://localhost:5000",
                     IssuerSigningKey = new SymmetricSecurityKey(key)
                 };
             });
@@ -105,6 +107,7 @@ namespace StudentCenterApi
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.Urls.Add("http://0.0.0.0:80");
 
             app.UseCors("CorsPolicy");
 
